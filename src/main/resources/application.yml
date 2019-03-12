@@ -3,4 +3,4 @@ dubbo:
   application:
    name: test-router-provider
   registry:
-    address: multicast://224.1.2.3:4567
+    address: zookeeper://127.0.0.1:2181
