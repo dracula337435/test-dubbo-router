@@ -33,3 +33,5 @@ Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException;
 1. ```Router```得到```List<Invoker>```
 1. ```LoadBalance```得到```Invoker```
 1. ```Filter```得到```Result```
+
+在真正发请求前，会有一次调用Router，如果这次失败，则后续没有Reference可用，一直```NullPointer````；如果这次没事，后续可随意成功失败

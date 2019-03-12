@@ -7,6 +7,7 @@ import com.alibaba.dubbo.rpc.RpcException;
 import com.alibaba.dubbo.rpc.cluster.Router;
 
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author dk
@@ -14,6 +15,8 @@ import java.util.List;
 public class MyRouter implements Router {
 
     private URL url;
+
+    private static Random random = new Random();
 
     public MyRouter(URL url){
         System.out.println("初始化了一个");
@@ -28,6 +31,11 @@ public class MyRouter implements Router {
     @Override
     public <T> List<Invoker<T>> route(List<Invoker<T>> invokers, URL url, Invocation invocation) throws RpcException {
         System.out.println("invokers = [" + invokers + "], url = [" + url + "], invocation = [" + invocation + "]");
+        System.out.println(this);
+        double some = random.nextDouble();
+        if(some < 0.5){
+            throw new RpcException("随便打个错");
+        }
         return invokers;
     }
 
