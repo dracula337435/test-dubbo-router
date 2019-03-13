@@ -3,8 +3,8 @@
 router
 
 group和version，不能一次来多个。
-例如consumer端设置```group="g1,g2"```不是两个```group```，provider端设置```group=g1```，调不到的
-version一样
+例如consumer端设置```group="g1,g2"```不是两个```group```，provider端设置``group=g1```，调不到的  
+version一样  
 consumer启动日志
 ```
 INFO 22092 --- [           main] c.a.d.r.zookeeper.ZookeeperRegistry      :  [DUBBO] Register: dubbo://219.142.191.206:20880/io.dracula.test.dubbo.router.TestService?anyhost=true&application=test-router-provider&dubbo=2.6.2&generic=false&group=g1,g2&interface=io.dracula.test.dubbo.router.TestService&methods=sayHello&pid=22092&revision=v1,v2&side=provider&timestamp=1552361766254&version=v1,v2, dubbo version: 2.6.2, current host: 219.142.191.206
@@ -34,4 +34,4 @@ Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException;
 1. ```LoadBalance```得到```Invoker```
 1. ```Filter```得到```Result```
 
-在真正发请求前，会有一次调用Router，如果这次失败，则后续没有Reference可用，一直```NullPointer````；如果这次没事，后续可随意成功失败
+在真正发请求前，会有一次调用```Router```，如果这次失败，则后续没有Reference可用，一直```NullPointer```；如果这次没事，后续可随意成功失败
