@@ -6,6 +6,7 @@ import com.alibaba.dubbo.rpc.Invoker;
 import com.alibaba.dubbo.rpc.RpcException;
 import com.alibaba.dubbo.rpc.cluster.Router;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -17,6 +18,8 @@ public class MyRouter implements Router {
     private URL url;
 
     private static Random random = new Random();
+
+    private int count = 0;
 
     public MyRouter(URL url){
         System.out.println("初始化了一个");
@@ -32,11 +35,27 @@ public class MyRouter implements Router {
     public <T> List<Invoker<T>> route(List<Invoker<T>> invokers, URL url, Invocation invocation) throws RpcException {
         System.out.println("invokers = [" + invokers + "], url = [" + url + "], invocation = [" + invocation + "]");
         System.out.println(this);
-        double some = random.nextDouble();
-        if(some < 0.5){
-            throw new RpcException("随便打个错");
+        count ++;
+        // 最初的两次结果会被缓存，如果将List<Invoker>范围缩小，之后将无法将其范围增大
+        // 于是，应该前两次条件很宽地放行List<Invoker>，之后随便筛选
+        // 经过对比，发现前两次的Invocation参数不太一样
+        // 第一次，methodName为null，parameterTypes和arguments均为空列表（非null）
+        // 第二次，methodName有实际值，parameterTypes和arguments均为空列表（非null）
+//        boolean isFirst2Call = invocation.getMethodName() == null;
+//        if(isFirst2Call){
+//            return invokers;
+//        }
+        if(count == 2 || count >= 8){
+            List<Invoker<T>> list = new LinkedList<>();
+            return list;
+        }else{
+            return invokers;
         }
-        return invokers;
+//        double some = random.nextDouble();
+//        if(some < 0.5){
+//            throw new RpcException("随便打个错");
+//        }
+//        return invokers;
     }
 
     @Override
