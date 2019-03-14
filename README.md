@@ -34,4 +34,10 @@ Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException;
 1. ```LoadBalance```得到```Invoker```
 1. ```Filter```得到```Result```
 
-在真正发请求前，会有一次调用```Router```，如果这次失败，则后续没有Reference可用，一直```NullPointer```；如果这次没事，后续可随意成功失败
+在真正发请求前，会有几次调用```Router```，如果这次失败，则后续没有Reference可用，一直```NullPointer```；如果这次没事，后续可随意成功失败
+最初的几次结果会被缓存，如果将List<Invoker>范围缩小，之后将无法将其范围增大  
+于是，应该前两次条件很宽地放行List<Invoker>，之后随便筛选  
+经过对比，发现前两次的Invocation参数不太一样  
+第一波，一次，methodName为null，parameterTypes和arguments均为空列表（非null）  
+第二波，一个函数名一次，methodName有实际值，parameterTypes和arguments均为空列表（非null）  
+父接口中的函数也会这样，如果有重载函数（同名，不同参数），算一个，在同一次中
