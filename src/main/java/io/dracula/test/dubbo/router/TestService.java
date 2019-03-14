@@ -18,4 +18,11 @@ public interface TestService {
      */
     String sayHello();
 
+    /**
+     *
+     * @param name
+     * @return
+     */
+    String sayHello2(String name);
+
 }

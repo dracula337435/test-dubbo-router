@@ -39,14 +39,14 @@ public class MyRouter implements Router {
         // 最初的几次结果会被缓存，如果将List<Invoker>范围缩小，之后将无法将其范围增大
         // 于是，应该前两次条件很宽地放行List<Invoker>，之后随便筛选
         // 经过对比，发现前两次的Invocation参数不太一样
-        // 第一次，methodName为null，parameterTypes和arguments均为空列表（非null）
-        // 第二次，methodName有实际值，parameterTypes和arguments均为空列表（非null）
+        // 第一波，一次，methodName为null，parameterTypes和arguments均为空列表（非null）
+        // 第二波，一个函数名一次，methodName有实际值，parameterTypes和arguments均为空列表（非null）
         // 如果有重载函数（同名，不同参数），算一个，在同一次中
 //        boolean isFirst2Call = invocation.getMethodName() == null;
 //        if(isFirst2Call){
 //            return invokers;
 //        }
-        if(count == 3 || count >= 8){
+        if(count == 4 || count >= 9){
             List<Invoker<T>> list = new LinkedList<>();
             return list;
         }else{

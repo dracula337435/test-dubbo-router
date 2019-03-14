@@ -18,4 +18,9 @@ public class TestServiceImpl implements TestService {
     public String sayHello() {
         return "hello who";
     }
+
+    @Override
+    public String sayHello2(String name) {
+        return "hello " + name + "2";
+    }
 }

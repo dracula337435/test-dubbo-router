@@ -40,6 +40,7 @@ public class ConsumerTest {
             try {
                 System.out.println(testService.sayHello("gxk"));
                 System.out.println(testService.sayHello());
+                System.out.println(testService.sayHello2("gxk"));
             } catch (Exception e) {
                 e.printStackTrace();
             }
