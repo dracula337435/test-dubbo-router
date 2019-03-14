@@ -3,7 +3,7 @@ package io.dracula.test.dubbo.router;
 /**
  * @author dk
  */
-public interface TestService {
+public interface TestService extends BaseTestService {
 
     /**
      *

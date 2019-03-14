@@ -41,12 +41,14 @@ public class MyRouter implements Router {
         // 经过对比，发现前两次的Invocation参数不太一样
         // 第一波，一次，methodName为null，parameterTypes和arguments均为空列表（非null）
         // 第二波，一个函数名一次，methodName有实际值，parameterTypes和arguments均为空列表（非null）
-        // 如果有重载函数（同名，不同参数），算一个，在同一次中
+        // 父接口中的函数也会这样，如果有重载函数（同名，不同参数），算一个，在同一次中
 //        boolean isFirst2Call = invocation.getMethodName() == null;
 //        if(isFirst2Call){
 //            return invokers;
 //        }
-        if(count == 4 || count >= 9){
+        System.out.println(count);
+        if((count >= 4+1 && count <= 4+4)
+                || count >= 4+4*5+1){
             List<Invoker<T>> list = new LinkedList<>();
             return list;
         }else{

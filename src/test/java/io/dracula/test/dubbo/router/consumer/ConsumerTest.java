@@ -38,8 +38,21 @@ public class ConsumerTest {
         for(int i=0; i<10; i++){
             System.out.println(i);
             try {
+                System.out.println(testService.baseMethod());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
                 System.out.println(testService.sayHello("gxk"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
                 System.out.println(testService.sayHello());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try {
                 System.out.println(testService.sayHello2("gxk"));
             } catch (Exception e) {
                 e.printStackTrace();

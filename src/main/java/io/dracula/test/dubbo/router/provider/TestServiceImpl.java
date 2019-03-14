@@ -10,6 +10,11 @@ import io.dracula.test.dubbo.router.TestService;
 public class TestServiceImpl implements TestService {
 
     @Override
+    public String baseMethod() {
+        return "in base";
+    }
+
+    @Override
     public String sayHello(String name) {
         return "hello " + name;
     }
